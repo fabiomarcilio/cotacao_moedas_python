@@ -1,2 +1,2 @@
 # cotacao_moedas_python
-Programa exemplo em python/django de cotação de moedas utilizando API externa.
+Exemplo de programa em python/django para cotação de moedas consumindo API externa.
