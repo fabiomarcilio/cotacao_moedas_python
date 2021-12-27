@@ -1,0 +1,24 @@
+<div class="card-body">
+    <table class="table table-hover table-mobile mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Moeda</th>
+                <th scope="col">Data inicial</th>
+                <th scope="col">Data final</th>
+                <th scope="col">Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cotacao in cotacoes %}
+                <tr>
+                    <td>{{ cotacao.moeda }}</td>
+                    <td>{{ cotacao.data_inicial }}</td>
+                    <td>{{ cotacao.data_final }}</td>
+                    <td>{{ cotacao.valor }}</td>
+                </tr>
+            {% empty %}
+                <p>Nenhum registro encontrado!</p>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

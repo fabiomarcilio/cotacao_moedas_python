@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="card card-primary shadow">
+    <div class="card-header">
+        <h3 class="card-title">Cotação</h3>
+    </div>
+    <form method="POST"
+        id="form_usuario_dados"
+        action="{% url 'core:create' %}"
+        hx-target="#container-cotacao-dados"
+        hx-swap="innerHTML">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form.moeda.label_tag }}
+                        {{ form.moeda }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form.data_inicial.label_tag }}
+                        {{ form.data_inicial }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form.data_final.label_tag }}
+                        {{ form.data_final }}
+                    </div>
+                </div>
+                {% comment %} <div class="col-md-3">
+                    <div class="form-group">
+                        {{ form.valor.label_tag }}
+                        {{ form.valor }}
+                    </div>
+                </div> {% endcomment %}
+            </div>
+            <div class="card-footer">
+                <button type="submit" id="btn_salvar" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </form> 
