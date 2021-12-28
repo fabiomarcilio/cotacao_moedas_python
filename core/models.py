@@ -8,21 +8,23 @@ MOEDAS = [
 ]
 
 
-class Moedas(models.Model):
+# class Moedas(models.Model):
 
-    moeda = models.CharField(
-        max_length=15, blank=False, null=False, choices=MOEDAS, default='BRL')
+#     moeda = models.CharField(
+#         max_length=15, blank=False, null=False, choices=MOEDAS, default='BRL')
 
-    class Meta:
-        db_table = 'moedas'
-        verbose_name = 'Moeda'
-        verbose_name_plural = 'Moedas'
+#     class Meta:
+#         db_table = 'moedas'
+#         verbose_name = 'Moeda'
+#         verbose_name_plural = 'Moedas'
 
 
 class Cotacao(models.Model):
 
-    moeda = models.ForeignKey(
-        Moedas, related_name='moedas', blank=True, null=True, on_delete=models.PROTECT)
+    # moeda = models.ForeignKey(
+    #     Moedas, related_name='moedas', blank=True, null=True, on_delete=models.PROTECT)
+    moeda = models.CharField(
+        max_length=15, blank=False, null=False, choices=MOEDAS, default='BRL')
     data_inicial = models.DateField(blank=True, null=True)
     data_final = models.DateField(blank=True, null=True)
     valor = models.DecimalField(

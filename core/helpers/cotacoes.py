@@ -1,32 +1,37 @@
 import requests
 from core.models import Cotacao
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.http import JsonResponse
+from django.db.models import Q
 
 
 class CotacaoMoedas():
 
-    def __init__(self, moeda: str, data: str):
+    def __init__(self, moeda: str, data: datetime):
         self.moeda = moeda
         self.data = data
         self.valor = 0
 
     def obter_cotacao(self):
-        # https://api.vatcomply.com/rates?base=USD
-        # https://api.vatcomply.com/rates?date=2000-04-05&base=USD
-        # url = "https://economia.awesomeapi.com.br/last/" + self.moeda + "-BRL"
-        url = "https://api.vatcomply.com/rates?date=" + self.data + "&base=USD"
-        retorno = requests.get(url)
-        if (retorno.status_code == 200):
-            json = retorno.json()
-            self.valor = json[self.moeda]
-        else:
-            self.valor = 0
-        return self.valor
+        # Função para obter a cotação conforme a data e moeda escolhida.
+        if self.verifica_dia_util():
+            data = self.data.strftime('%Y-%m-%d')
+            url = "https://api.vatcomply.com/rates?date=" + data + "&base=USD"
+            retorno = requests.get(url)
+            if (retorno.status_code == 200):
+                json = retorno.json()
+                self.valor = json['rates'][self.moeda]
+            else:
+                self.valor = 0
+            return self.valor
+
+    def verifica_dia_util(self):
+        # Verifica se a data é um dia útil antes de obter a cotação.
+        if self.data.weekday() < 5:
+            return True
 
     def atualizar_banco(self):
+        # Chama o método da classe para obter a cotação e gravar no BD.
         self.obter_cotacao()
-        Cotacao.objects.filter(moeda=self.moeda).update(
-            valor=float(self.valor),
-            data=datetime.today()
-        )
+        Cotacao.objects.create(valor=float(self.valor),
+                               data_inicial=self.data, moeda=self.moeda)
