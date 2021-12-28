@@ -14,8 +14,8 @@ class CotacaoModelForm(forms.ModelForm):
     moeda = forms.ChoiceField(required=True, label='Moeda', choices=MOEDAS, widget=forms.Select(
         attrs={'class': 'form-control'}), initial='BRL')
     data_inicial = forms.CharField(label='Data Inicial', widget=forms.DateInput(
-        format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control'}))
+        format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control mask-data'}))
     data_final = forms.CharField(label='Data Final', widget=forms.DateInput(
-        format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control'}))
+        format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control mask-data'}))
     # valor = forms.CharField(label='Valor', widget=forms.TextInput(
     #     attrs={'class': 'form-control'}))

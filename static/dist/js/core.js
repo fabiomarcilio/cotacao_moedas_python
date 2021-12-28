@@ -1,26 +1,8 @@
-// $('#btn_salvar').change(function () {
-//     atualiza_valor()
+// $(function () {
+//     //Adiciona máscara da data na criação da tela.
+//     $('.mask-data').mask('00/00/0000');
 // });
-
-// $(document).on("submit", function () {
-//     atualiza_valor();
-// });
-
-// function atualiza_valor(moeda, data) {
-//     $.ajax({
-//         beforeSend: function (xhr, settings) {
-//             xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
-//         },
-//         type: "POST",
-//         url: "/core/atualizar_valor_indexador/",
-//         ContentType: "application/json; charset=utf-8",
-//         dataType: "json",
-//         data: {
-//             moeda: moeda,
-//             data: data,
-//         },
-//         success: function (request, status, error) {
-//             // $('#id_indexador-valor').val(request.cotacao)
-//         }
-//     })
-// }
+// $( "#datepicker" ).datepicker({  maxDate: 0 });
+$("#id_data_inicial").blur(function () {
+    $("#id_data_final").datepicker('max= 5');
+});
