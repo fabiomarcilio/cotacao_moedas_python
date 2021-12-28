@@ -71,12 +71,12 @@
             </div>
 
         </div>
-        <!--Mensagens-->
-        {% comment %}
-                Cria uma mensagem com o plugin toastr, passando o conteúdo de
-                'message.tags' como o tipo do toast e de 'message' como o texto
-            {% endcomment %}
-        {% if messages %}
+    <!--Mensagens-->
+    {% comment %}
+        Cria uma mensagem com o plugin toastr, passando o conteúdo de
+        'message.tags' como o tipo do toast e de 'message' como o texto
+    {% endcomment %}
+    {% if messages %}
         {% for message in messages %}
             {% if message.level_tag == 'success' or message.level_tag == 'info' or message.level_tag == 'warning' or message.level_tag == 'error' %}
                 <script type=text/javascript>
@@ -84,7 +84,7 @@
                 </script>
             {% endif %}
         {% endfor %}
-        {% endif %}
+    {% endif %}
         <!--/Mensagens-->
 
         <!--Highcharts-->
@@ -105,10 +105,5 @@
                 event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
             })
         </script>
-
-
-        <script src="{%  static 'dist/js/core.js'%}"></script>
-
-    
     </body>
 </html>

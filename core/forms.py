@@ -14,8 +14,15 @@ class CotacaoModelForm(forms.ModelForm):
     moeda = forms.ChoiceField(required=True, label='Moeda', choices=MOEDAS, widget=forms.Select(
         attrs={'class': 'form-control'}), initial='BRL')
     data_inicial = forms.CharField(label='Data Inicial', widget=forms.DateInput(
-        format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control mask-data'}))
+        format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control mask-data datepicker'}))
     data_final = forms.CharField(label='Data Final', widget=forms.DateInput(
-        format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control mask-data'}))
+        format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control mask-data datepicker'}))
     # valor = forms.CharField(label='Valor', widget=forms.TextInput(
     #     attrs={'class': 'form-control'}))
+
+    def clean_FIELD(self):
+        FIELD = self.cleaned_data.get('FIELD')
+
+        # TODO Validation
+
+        return FIELD

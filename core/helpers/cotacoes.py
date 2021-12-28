@@ -26,17 +26,23 @@ class CotacaoMoedas():
             self.valor = 0
         return self.valor
 
-    def verifica_dia_util(self):
+    def verifica_dia_util(self, data):
         # Verifica se a data é um dia útil antes de obter a cotação.
-        if self.data_inicial.weekday() < 5:
+        if data.weekday() < 5:
             return True
 
     def atualizar_banco(self):
         # Chama o método da classe para obter a cotação e gravar no BD.
-        if self.verifica_dia_util():
-            self.obter_cotacao()
-            Cotacao.objects.create(valor=float(self.valor),
-                                   data_inicial=self.data_inicial, data_final=self.data_final, moeda=self.moeda, status='Consulta ok')
-        else:
-            Cotacao.objects.create(valor=0,
-                                   data_inicial=self.data_inicial, data_final=self.data_final, moeda=self.moeda, status='Dia não útil')
+        # if self.verifica_dia_util():
+        while self.data_inicial <= self.data_final:
+            if self.verifica_dia_util(self.data_inicial):
+                self.obter_cotacao()
+                Cotacao.objects.create(valor=float(self.valor),
+                                       data_inicial=self.data_inicial, data_final=self.data_final, moeda=self.moeda, status='Consulta ok')
+                self.data_inicial += timedelta(days=1)
+            else:
+                self.data_inicial += timedelta(days=1)
+                self.data_final += timedelta(days=1)
+                # else:
+                #     Cotacao.objects.create(valor=0,
+                #                            data_inicial=self.data_inicial, data_final=self.data_final, moeda=self.moeda, status='Dia não útil')
