@@ -5,8 +5,8 @@
         <h3 class="card-title">Cotação</h3>
     </div>
     <form method="POST"
-        id="form_usuario_dados"
-        action="{% url 'core:create' %}"
+        id="form_cotacao_dados"
+        hx-post="{% url 'core:create' %}"
         hx-target="#container-cotacao-dados"
         hx-swap="innerHTML">
         {% csrf_token %}

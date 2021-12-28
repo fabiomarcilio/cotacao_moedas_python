@@ -7,16 +7,17 @@ from django.db.models import Q
 
 class CotacaoMoedas():
 
-    def __init__(self, moeda: str, data: datetime):
+    def __init__(self, moeda: str, data_inicial: datetime, data_final: datetime):
         self.moeda = moeda
-        self.data = data
+        self.data_inicial = data_inicial
+        self.data_final = data_final
         self.valor = 0
 
     def obter_cotacao(self):
         # Função para obter a cotação conforme a data e moeda escolhida
         # Consumindo a API api.vatcomply.com
         if self.verifica_dia_util():
-            data = self.data.strftime('%Y-%m-%d')
+            data = self.data_inicial.strftime('%Y-%m-%d')
             url = "https://api.vatcomply.com/rates?date=" + data + "&base=USD"
             retorno = requests.get(url)
             if (retorno.status_code == 200):
@@ -28,11 +29,11 @@ class CotacaoMoedas():
 
     def verifica_dia_util(self):
         # Verifica se a data é um dia útil antes de obter a cotação.
-        if self.data.weekday() < 5:
+        if self.data_inicial.weekday() < 5:
             return True
 
     def atualizar_banco(self):
         # Chama o método da classe para obter a cotação e gravar no BD.
         self.obter_cotacao()
         Cotacao.objects.create(valor=float(self.valor),
-                               data_inicial=self.data, moeda=self.moeda)
+                               data_inicial=self.data_inicial, data_final=self.data_final, moeda=self.moeda)

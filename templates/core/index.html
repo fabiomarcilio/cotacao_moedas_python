@@ -22,6 +22,10 @@
         <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
         <!-- AdminLTE App -->
         <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+        <!-- toastr -->
+        <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+
+
 
     </head>
     <body>
@@ -53,7 +57,7 @@
                                             hx-trigger="load"
                                             hx-swap="innerHTML">
                                         </div>
-                                        <div class="container-cotacao-list"
+                                        <div id="container-cotacao-list"
                                             hx-get="{% url 'core:list' %}"
                                             hx-trigger="load, hx-list-updated from:body"
                                             hx-swap="innerHTML">
@@ -65,19 +69,46 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-    <!--HTMX-->
-    <script src="https://unpkg.com/htmx.org@1.6.0"></script>
-    <!--Hyperscript-->
-    <script src="https://unpkg.com/hyperscript.org@0.8.2"></script>
-    <!--CSRF for HTMX requests-->
-    <script>
-        {% comment %} Adiciona o CSRF token aos headers do HTMX {% endcomment %}
-        document.body.addEventListener('htmx:configRequest', (event) => {
-            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
-        })
-    </script>
-    <script src="{%  static 'dist/js/core.js'%}"></script>
+        </div>
+        <!--Mensagens-->
+        {% comment %}
+                Cria uma mensagem com o plugin toastr, passando o conteúdo de
+                'message.tags' como o tipo do toast e de 'message' como o texto
+            {% endcomment %}
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.level_tag == 'success' or message.level_tag == 'info' or message.level_tag == 'warning' or message.level_tag == 'error' %}
+                <script type=text/javascript>
+                    toastr.{{ message.level_tag }}('{{ message }}', '{{ message.extra_tags|default_if_none:"" }}')
+                </script>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        <!--/Mensagens-->
+
+        <!--Highcharts-->
+        <script src="{% static 'code/highcharts.js' %}"></script>
+        <script src="{% static 'code/modules/series-label.js' %}"></script>
+        <script src="{% static 'code/modules/exporting.js' %}"></script>
+        <script src="{% static 'code/modules/export-data.js' %}"></script>
+        <script src="{% static 'code/modules/accessibility.js' %}"></script>
+
+        <!--HTMX-->
+        <script src="https://unpkg.com/htmx.org@1.6.0"></script>
+        <!--Hyperscript-->
+        <script src="https://unpkg.com/hyperscript.org@0.8.2"></script>
+        <!--CSRF for HTMX requests-->
+        <script>
+            {% comment %} Adiciona o CSRF token aos headers do HTMX {% endcomment %}
+            document.body.addEventListener('htmx:configRequest', (event) => {
+                event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+            })
+        </script>
+
+
+        <script src="{%  static 'dist/js/core.js'%}"></script>
+
+    
     </body>
 </html>
