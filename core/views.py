@@ -1,23 +1,22 @@
+from core.helpers.cotacoes import CotacaoMoedas
+from core.models import Cotacao
+from django.urls import reverse_lazy
+from datetime import datetime, timedelta
+from core.forms import CotacaoModelForm
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView
-from core.forms import CotacaoModelForm
-from datetime import datetime, timedelta
-from django.urls import reverse_lazy
-
-
-from core.models import Cotacao
-
-from core.helpers.cotacoes import CotacaoMoedas
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 def site(request):
     return render(request, 'core/index.html')
 
 
-class CotacaoHtmxCreateView(CreateView):
+class CotacaoHtmxCreateView(SuccessMessageMixin, CreateView):
     model = Cotacao
     template_name = 'core/partials/htmx_cotacao_dados.html'
     form_class = CotacaoModelForm
+    # success_message = 'Cotação concluida'
     success_message = 'Cotação concluida'
 
     def get_context_data(self, **kwargs):

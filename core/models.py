@@ -29,6 +29,8 @@ class Cotacao(models.Model):
     data_final = models.DateField(blank=True, null=True)
     valor = models.DecimalField(
         max_digits=10, decimal_places=6, default=0, blank=False, null=False)
+    status = models.CharField(
+        max_length=15, blank=True, null=True)
 
     class Meta:
         db_table = 'cotacoes'

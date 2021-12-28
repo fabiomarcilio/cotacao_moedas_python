@@ -16,16 +16,15 @@ class CotacaoMoedas():
     def obter_cotacao(self):
         # Função para obter a cotação conforme a data e moeda escolhida
         # Consumindo a API api.vatcomply.com
-        if self.verifica_dia_util():
-            data = self.data_inicial.strftime('%Y-%m-%d')
-            url = "https://api.vatcomply.com/rates?date=" + data + "&base=USD"
-            retorno = requests.get(url)
-            if (retorno.status_code == 200):
-                json = retorno.json()
-                self.valor = json['rates'][self.moeda]
-            else:
-                self.valor = 0
-            return self.valor
+        data = self.data_inicial.strftime('%Y-%m-%d')
+        url = "https://api.vatcomply.com/rates?date=" + data + "&base=USD"
+        retorno = requests.get(url)
+        if (retorno.status_code == 200):
+            json = retorno.json()
+            self.valor = json['rates'][self.moeda]
+        else:
+            self.valor = 0
+        return self.valor
 
     def verifica_dia_util(self):
         # Verifica se a data é um dia útil antes de obter a cotação.
@@ -34,6 +33,10 @@ class CotacaoMoedas():
 
     def atualizar_banco(self):
         # Chama o método da classe para obter a cotação e gravar no BD.
-        self.obter_cotacao()
-        Cotacao.objects.create(valor=float(self.valor),
-                               data_inicial=self.data_inicial, data_final=self.data_final, moeda=self.moeda)
+        if self.verifica_dia_util():
+            self.obter_cotacao()
+            Cotacao.objects.create(valor=float(self.valor),
+                                   data_inicial=self.data_inicial, data_final=self.data_final, moeda=self.moeda, status='Consulta ok')
+        else:
+            Cotacao.objects.create(valor=0,
+                                   data_inicial=self.data_inicial, data_final=self.data_final, moeda=self.moeda, status='Dia não útil')
