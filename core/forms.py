@@ -19,10 +19,3 @@ class CotacaoModelForm(forms.ModelForm):
         format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control mask-data datepicker'}))
     # valor = forms.CharField(label='Valor', widget=forms.TextInput(
     #     attrs={'class': 'form-control'}))
-
-    def clean_FIELD(self):
-        FIELD = self.cleaned_data.get('FIELD')
-
-        # TODO Validation
-
-        return FIELD

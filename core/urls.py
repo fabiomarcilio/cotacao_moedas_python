@@ -1,13 +1,13 @@
 from django.urls import path
 
-from .views import site, CotacaoHtmxCreateView, CotacaoHtmxListView
+from .views import SiteTemplateview, CotacaoHtmxCreateView, CotacaoHtmxListView, CotacaoHtmxDeleteView
 
 app_name = 'core'
 
 urlpatterns = [
     path(
         route='',
-        view=site,
+        view=SiteTemplateview.as_view(),
         name='index',
     ),
     path(
@@ -20,9 +20,9 @@ urlpatterns = [
         view=CotacaoHtmxListView.as_view(),
         name='list',
     ),
-    # path(
-    #     route='atualizar_valor_indexador/',
-    #     view=atualizar_valor_indexador,
-    #     name='atualizar_valor_indexador'
-    # ),
+    path(
+        route='<int:pk>/delete/',
+        view=CotacaoHtmxDeleteView.as_view(),
+        name='delete'
+    ),
 ]
