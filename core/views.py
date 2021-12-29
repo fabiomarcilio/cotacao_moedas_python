@@ -27,13 +27,13 @@ class CotacaoHtmxCreateView(SuccessMessageMixin, CreateView):
     form_class = CotacaoModelForm
     success_message = 'Cotação concluída!'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
 
-        context['valores_moeda'] = json.dumps(retornar_valores_grafico(self))
-        context['moeda'] = json.dumps(retornar_moeda(self))
-        context['dia_inicial'] = json.dumps(retornar_data_inicial(self))
-        return context
+    #     context['valores_moeda'] = json.dumps(retornar_valores_grafico(self))
+    #     context['moeda'] = json.dumps(retornar_moeda(self))
+    #     context['dia_inicial'] = json.dumps(retornar_data_inicial(self))
+    #     return context
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
@@ -62,6 +62,10 @@ class CotacaoHtmxCreateView(SuccessMessageMixin, CreateView):
 
     #     CotacaoMoedas(moeda, data_inicial, data_final).atualizar_banco()
 
+    #     response['valores_moeda'] = json.dumps(retornar_valores_grafico(self))
+    #     response['moeda'] = json.dumps(retornar_moeda(self))
+    #     response['dia_inicial'] = json.dumps(retornar_data_inicial(self))
+
     #     response['HX-Trigger'] = 'hx-list-update'
     #     messages.success(self.request, self.get_success_message())
     #     return response
@@ -78,7 +82,7 @@ class CotacaoHtmxListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        context["cotacoes"] = Cotacao.objects.all().order_by('-id')
         context['valores_moeda'] = json.dumps(retornar_valores_grafico(self))
         context['moeda'] = json.dumps(retornar_moeda(self))
         context['dia_inicial'] = json.dumps(retornar_data_inicial(self))

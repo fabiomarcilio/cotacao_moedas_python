@@ -4,27 +4,23 @@ from core.models import Cotacao
 
 def retornar_valores_grafico(self):
     data = []
-    # data_final = datetime.now().date()
-    # data_inicial = data_final - timedelta(days=4)
-    cotacoes = Cotacao.objects.filter(moeda='BRL')
+    cotacoes = Cotacao.objects.filter(moeda=retornar_moeda(self))[:5]
     for cotacao in cotacoes:
         data.append(float(cotacao.valor))
     return data
 
 
 def retornar_moeda(self):
-    teste = ''
-    if self.request.POST.get('moeda'):
-        moeda = self.request.POST.get('moeda')
-    else:
-        moeda = 'BRL'
+    moeda = Cotacao.objects.filter().last().moeda
     return moeda
 
 
 def retornar_data_inicial(self):
-    if self.request.POST.get('data_inicial'):
-        data = self.request.POST.get('data_inicial')
-    else:
-        data_inicial = datetime.now() - timedelta(days=5)
-        data = data_inicial.day
+    data = Cotacao.objects.filter(
+        moeda=retornar_moeda(self)).first().data_inicial.day
+    # if self.request.POST.get('data_inicial'):
+    #     data = self.request.POST.get('data_inicial')
+    # else:
+    #     data_inicial = datetime.now() - timedelta(days=5)
+    #     data = data_inicial.day
     return data
