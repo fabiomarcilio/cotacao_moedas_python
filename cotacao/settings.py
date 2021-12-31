@@ -83,13 +83,13 @@ WSGI_APPLICATION = 'cotacao.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASE_PASS = 'Desafio2022CotacaoBRMed'
+DATABASE_PASS = 'a9fd56aeb2dde273df05382b9a89e02354ad9157f5c77967de554bfabb6b5318'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cotacaopython',
-        'USER': 'cotacaopython',
+        'NAME': 'd3j6jd9e76o1pu',
+        'USER': 'puacetierospog',
         'PASSWORD': DATABASE_PASS,
         'HOST': 'localhost',
         'PORT': '5432',
