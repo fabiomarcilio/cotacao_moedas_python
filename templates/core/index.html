@@ -31,8 +31,6 @@
         <!-- Sweet Alert -->
         <script src="{% static 'plugins/sweetalert2/sweetalert2.all.min.js' %}"></script>
 
-
-
     </head>
     <body>
         <div class="content-header">
@@ -66,7 +64,7 @@
                                         <div id="container-cotacao-list"
                                             hx-get="{% url 'core:list' %}"
                                             hx-vals='{"moeda": "{{ moeda }}"}'
-                                            hx-trigger="load, hx-list-updated from:body"
+                                            hx-trigger="load, hx-list-updated confirmado from:body"
                                             hx-swap="innerHTML">
                                         </div>
                                     </div>
@@ -76,23 +74,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-    <!--Mensagens-->
-    {% comment %}
-        Cria uma mensagem com o plugin toastr, passando o conteúdo de
-        'message.tags' como o tipo do toast e de 'message' como o texto
-    {% endcomment %}
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.level_tag == 'success' or message.level_tag == 'info' or message.level_tag == 'warning' or message.level_tag == 'error' %}
-                <script type=text/javascript>
-                    toastr.{{ message.level_tag }}('{{ message }}', '{{ message.extra_tags|default_if_none:"" }}')
-                </script>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-        <!--/Mensagens-->
 
         <!--Highcharts-->
         <script src="{% static 'code/highcharts.js' %}"></script>
@@ -102,8 +84,6 @@
         <script src="{% static 'code/modules/accessibility.js' %}"></script>
 
         <!--HTMX-->
-        {% comment %} <script src="https://unpkg.com/htmx.org@1.6.0"></script> {% endcomment %}
-
         <script src="https://unpkg.com/htmx.org@1.6.0" crossorigin="anonymous"
         integrity="sha384-G4dtlRlMBrk5fEiRXDsLjriPo8Qk5ZeHVVxS8KhX6D7I9XXJlNqbdvRlp9/glk5D">
         </script>

@@ -1,5 +1,7 @@
+{% extends 'core/base_htmx.html' %}
 {% load static %}
 
+{% block content %}
 <div class="card card-primary shadow">
     <div class="card-header">
         <h3 class="card-title">Cotação</h3>
@@ -42,4 +44,6 @@
             </div>
         </div>
     </form>
-    <script src="{%  static 'dist/js/core.js'%}"></script> 
+</div>
+<script src="{%  static 'dist/js/core.js'%}"></script> 
+{% endblock content %}

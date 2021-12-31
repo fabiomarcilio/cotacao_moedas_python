@@ -1,3 +1,4 @@
+
 Highcharts.chart('container', {
 
     title: {
@@ -10,7 +11,7 @@ Highcharts.chart('container', {
 
     yAxis: {
         title: {
-            text: 'Porcentagem'
+            text: 'Valores'
         }
     },
 
@@ -31,13 +32,14 @@ Highcharts.chart('container', {
             label: {
                 connectorAllowed: false
             },
-            pointStart: 2010
+            pointStart: dia_inicial
         }
     },
 
     series: [{
-        name: 'BRL',
-        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+        name: moeda.toString(),
+        data: dados
+        // data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
     }],
 
     responsive: {
