@@ -88,12 +88,12 @@ DATABASE_PASS = 'Desafio2022CotacaoBRMed'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gamemania',
-        'USER': 'gamemania',
+        'NAME': 'cotacaopython',
+        'USER': 'cotacaopython',
         'PASSWORD': DATABASE_PASS,
         'HOST': 'localhost',
         'PORT': '5432',
-        'ATOMIC_REQUESTS': True,
+        # 'ATOMIC_REQUESTS': True,
     }
 }
 
