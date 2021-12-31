@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Moeda</th>
-                        <th scope="col">Data inicial</th>
+                        <th scope="col">Data da Cotação</th>
                         <th scope="col">Valor</th>
                         <th scope="col">Status</th>
                         <th scope="col">Ações</th>
@@ -20,7 +20,7 @@
                     {% for cotacao in cotacoes %}
                     <tr>
                         <td>{{ cotacao.moeda }}</td>
-                        <td>{{ cotacao.data_inicial }}</td>
+                        <td>{{ cotacao.data_cotacao|date:"d/m/Y" }}</td>
                         <td>{{ cotacao.valor }}</td>
                         <td>{{ cotacao.status }}</td>
                         <td>
@@ -55,13 +55,8 @@
 <script>
     var moeda = {{ moeda|safe }};
     var dados  = {{ valores_moeda|safe }};
-    var dia_inicial = {{ dia_inicial|safe }};
+    var dias_grafico = {{ dias_grafico|safe }};
 </script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/series-label.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script src="{% static 'dist/js/grafico2.js' %}"></script>
+
+<script src="{% static 'dist/js/grafico.js' %}"></script>
 {% endblock content %}

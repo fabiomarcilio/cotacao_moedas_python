@@ -8,7 +8,8 @@ from django.views.generic import CreateView, ListView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 import json
-from core.helpers.funcoes import retornar_valores_grafico, retornar_moeda, retornar_data_inicial, verifica_dia_util
+from core.helpers.funcoes import (retorna_valores_grafico, retorna_moeda,
+                                  verifica_dia_util, retorna_dias_grafico)
 
 
 class SiteTemplateview(TemplateView):
@@ -44,8 +45,8 @@ class CotacaoHtmxListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        if not Cotacao.objects.filter(data_inicial=datetime.now().date()):
-            moeda = retornar_moeda()
+        if not Cotacao.objects.filter(data_cotacao=datetime.now().date()):
+            moeda = retorna_moeda()
             data_final = datetime.now().date()
             data_inicial = data_final - timedelta(days=4)
             while verifica_dia_util(data_inicial) == False:
@@ -53,10 +54,10 @@ class CotacaoHtmxListView(ListView):
 
             CotacaoMoedas(moeda, data_inicial, data_final).atualizar_banco()
 
-        context['moeda'] = json.dumps(retornar_moeda())
-        context['valores_moeda'] = json.dumps(retornar_valores_grafico())
-        context['dia_inicial'] = json.dumps(retornar_data_inicial(self))
-        context["cotacoes"] = Cotacao.objects.all().order_by('-id')
+        context['moeda'] = json.dumps(retorna_moeda())
+        context['valores_moeda'] = json.dumps(retorna_valores_grafico())
+        context['dias_grafico'] = json.dumps(retorna_dias_grafico(self))
+        context['cotacoes'] = Cotacao.objects.all().order_by('-id')
         return context
 
 

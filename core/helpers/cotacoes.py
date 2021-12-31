@@ -27,11 +27,16 @@ class CotacaoMoedas():
 
     def atualizar_banco(self):
         # Chama o método da classe para obter a cotação e gravar no BD.
+        data_inicio_base = self.data_inicial
         while self.data_inicial <= self.data_final:
             if verifica_dia_util(self.data_inicial):
                 self.obter_cotacao()
                 Cotacao.objects.create(valor=float(self.valor),
-                                       data_inicial=self.data_inicial, data_final=self.data_final, moeda=self.moeda, status='Consulta ok')
+                                       data_inicial=data_inicio_base,
+                                       data_final=self.data_final,
+                                       data_cotacao=self.data_inicial,
+                                       moeda=self.moeda,
+                                       status='Consulta ok')
                 self.data_inicial += timedelta(days=1)
             else:
                 self.data_inicial += timedelta(days=1)

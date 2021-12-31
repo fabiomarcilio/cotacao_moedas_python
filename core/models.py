@@ -27,6 +27,7 @@ class Cotacao(models.Model):
         max_length=15, blank=False, null=False, choices=MOEDAS, default='BRL')
     data_inicial = models.DateField(blank=True, null=True)
     data_final = models.DateField(blank=True, null=True)
+    data_cotacao = models.DateField(blank=True, null=True)
     valor = models.DecimalField(
         max_digits=10, decimal_places=6, default=0, blank=False, null=False)
     status = models.CharField(
