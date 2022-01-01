@@ -13,7 +13,8 @@ def verifica_dia_util(data: datetime):
 def retorna_valores_grafico():
     # Retorna os valores em uma lista para popular o gráfico.
     data = []
-    cotacoes = Cotacao.objects.filter(moeda=retorna_moeda())[:5]
+    cotacoes = Cotacao.objects.filter(
+        moeda=retorna_moeda()).exclude(valor=0)[:5]
     for cotacao in cotacoes:
         data.append(float(cotacao.valor))
     return data

@@ -39,6 +39,12 @@ class CotacaoMoedas():
                                        status='Consulta ok')
                 self.data_inicial += timedelta(days=1)
             else:
+                Cotacao.objects.create(valor=0,
+                                       data_inicial=data_inicio_base,
+                                       data_final=self.data_final,
+                                       data_cotacao=self.data_inicial,
+                                       moeda=self.moeda,
+                                       status='Dia não útil')
                 self.data_inicial += timedelta(days=1)
                 if self.data_final < datetime.now().date():
                     self.data_final += timedelta(days=1)

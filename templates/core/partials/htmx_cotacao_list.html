@@ -21,8 +21,20 @@
                     <tr>
                         <td>{{ cotacao.moeda }}</td>
                         <td>{{ cotacao.data_cotacao|date:"d/m/Y" }}</td>
-                        <td>{{ cotacao.valor }}</td>
-                        <td>{{ cotacao.status }}</td>
+                        <td >
+                            {% if cotacao.valor == 0 %}
+                                <span class=""><i> Sem valor </i></span>
+                            {% else %}
+                                {{ cotacao.valor }}
+                            {% endif %}
+                        </td>
+                        <td >
+                            {% if cotacao.status == 'Consulta ok' %}
+                                <span class="text-success"><i>Consulta ok </i></span>
+                            {% else %}
+                                <span class="text-danger"><i>Dia não útil </i></span>
+                            {% endif %}
+                        </td>
                         <td>
                             <a hx-trigger="confirmado"
                             href="#"

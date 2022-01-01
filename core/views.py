@@ -49,8 +49,9 @@ class CotacaoHtmxListView(ListView):
             moeda = retorna_moeda()
             data_final = datetime.now().date()
             data_inicial = data_final - timedelta(days=4)
-            while verifica_dia_util(data_inicial) == False:
+            while verifica_dia_util(data_inicial) == False or verifica_dia_util(data_final) == False:
                 data_inicial = data_inicial - timedelta(days=1)
+                data_final = data_final - timedelta(days=1)
 
             CotacaoMoedas(moeda, data_inicial, data_final).atualizar_banco()
 

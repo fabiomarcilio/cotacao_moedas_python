@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-!8ed6%h6tw2f7=n8lf)3r&kt2do%xz9t1z@k)kwu7q+@(l21+w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['cotacaomoedas.herokuapp.com']
-# ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['cotacaomoedas.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,23 +78,10 @@ WSGI_APPLICATION = 'cotacao.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-DATABASE_PASS = '8a8f9747e40e605dc79e6c40ece4a0679ba68db9e32d48289b1db7dfc8ee77a8'
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dcvr67pf7uto3d',
-        'USER': 'oerehhyvewmipm',
-        'PASSWORD': DATABASE_PASS,
-        'HOST': 'ec2-23-21-229-200.compute-1.amazonaws.com',
-        'PORT': '5432',
-        'ATOMIC_REQUESTS': True,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
