@@ -83,13 +83,13 @@ WSGI_APPLICATION = 'cotacao.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASE_PASS = 'a9fd56aeb2dde273df05382b9a89e02354ad9157f5c77967de554bfabb6b5318'
+DATABASE_PASS = 'f96ad40b66ea50a606ea2035ee4f4cc54fa6795727753d801921dd7e6e8b5ab5'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd3j6jd9e76o1pu',
-        'USER': 'puacetierospog',
+        'NAME': 'd773vm6mnv66i1',
+        'USER': 'icjdligdldaoyy',
         'PASSWORD': DATABASE_PASS,
         'HOST': 'localhost',
         'PORT': '5432',
