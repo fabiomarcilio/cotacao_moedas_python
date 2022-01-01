@@ -91,7 +91,7 @@ DATABASES = {
         'NAME': 'd773vm6mnv66i1',
         'USER': 'icjdligdldaoyy',
         'PASSWORD': DATABASE_PASS,
-        'HOST': 'localhost',
+        'HOST': 'ec2-54-204-28-187.compute-1.amazonaws.com',
         'PORT': '5432',
         'ATOMIC_REQUESTS': True,
     }
