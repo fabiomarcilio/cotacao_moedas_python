@@ -49,7 +49,15 @@ class CotacaoHtmxListView(ListView):
             moeda = retorna_moeda()
             data_final = datetime.now().date()
             data_inicial = data_final - timedelta(days=4)
+            hoje = datetime.now().date()
+            context['hoje'] = hoje
             while verifica_dia_util(data_inicial) == False or verifica_dia_util(data_final) == False:
+                Cotacao.objects.create(valor=0,
+                                       data_inicial=data_inicial,
+                                       data_final=data_final,
+                                       data_cotacao=data_final,
+                                       moeda=moeda,
+                                       status='Dia não útil')
                 data_inicial = data_inicial - timedelta(days=1)
                 data_final = data_final - timedelta(days=1)
 
