@@ -63,8 +63,7 @@
                                         </div>
                                         <div id="container-cotacao-list"
                                             hx-get="{% url 'core:list' %}"
-                                            hx-vals='{"moeda": "{{ moeda }}"}'
-                                            hx-trigger="load, hx-list-updated confirmado from:body"
+                                            hx-trigger="load, hx-list-updated from:body"
                                             hx-swap="innerHTML">
                                         </div>
                                     </div>
