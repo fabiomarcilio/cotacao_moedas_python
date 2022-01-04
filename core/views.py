@@ -41,6 +41,7 @@ class CotacaoHtmxListView(ListView):
     model = Cotacao
     template_name = 'core/partials/htmx_cotacao_list.html'
     context_object_name = 'cotacoes'
+    paginate_by = 8
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -66,7 +67,7 @@ class CotacaoHtmxListView(ListView):
         context['moeda'] = json.dumps(retorna_moeda())
         context['valores_moeda'] = json.dumps(retorna_valores_grafico())
         context['dias_grafico'] = json.dumps(retorna_dias_grafico(self))
-        context['cotacoes'] = Cotacao.objects.all().order_by('-id')
+        # context['cotacoes'] = Cotacao.objects.all().order_by('-id')
         return context
 
 

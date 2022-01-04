@@ -78,26 +78,13 @@ WSGI_APPLICATION = 'cotacao.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DATABASE_PASS = '8a8f9747e40e605dc79e6c40ece4a0679ba68db9e32d48289b1db7dfc8ee77a8'
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dcvr67pf7uto3d',
-        'USER': 'oerehhyvewmipm',
-        'PASSWORD': DATABASE_PASS,
-        'HOST': 'ec2-23-21-229-200.compute-1.amazonaws.com',
-        'PORT': '5432',
-        'ATOMIC_REQUESTS': True,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
