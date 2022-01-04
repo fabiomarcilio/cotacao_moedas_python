@@ -40,7 +40,7 @@ class CotacaoHtmxCreateView(SuccessMessageMixin, CreateView):
 class CotacaoHtmxListView(ListView):
     model = Cotacao
     template_name = 'core/partials/htmx_cotacao_list.html'
-    context_object_name = 'cotacoes'
+    # context_object_name = 'cotacoes'
     paginate_by = 8
     ordering = '-id'
 
@@ -68,6 +68,9 @@ class CotacaoHtmxListView(ListView):
         context['moeda'] = json.dumps(retorna_moeda())
         context['valores_moeda'] = json.dumps(retorna_valores_grafico())
         context['dias_grafico'] = json.dumps(retorna_dias_grafico(self))
+        # Necessário voltar as cotações no contexto manualmente pois pelo
+        # comportamento normal da listview não irá carregar as alterações pré definidas.
+        context['cotacoes'] = Cotacao.objects.all().order_by('-id')
         return context
 
 
