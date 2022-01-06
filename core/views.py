@@ -81,9 +81,8 @@ class CotacaoHtmxDeleteView(SuccessMessageMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        cotacoes = Cotacao.objects.filter(
-            id=self.object.id)
         self.object.delete()
-        cotacoes = Cotacao.objects.all().order_by('-id')
         messages.success(request, self.success_message)
-        return render(request, self.template_name, {'cotacoes': cotacoes})
+        response = render(request, self.template_name)
+        response['HX-Trigger'] = 'hx-list-updated'
+        return response
